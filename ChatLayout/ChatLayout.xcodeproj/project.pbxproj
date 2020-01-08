@@ -12,6 +12,8 @@
 		7C068CE023C52DF900D0ADDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C068CDE23C52DF900D0ADDA /* Main.storyboard */; };
 		7C068CE223C52DFA00D0ADDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C068CE123C52DFA00D0ADDA /* Assets.xcassets */; };
 		7C068CE523C52DFA00D0ADDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C068CE323C52DFA00D0ADDA /* LaunchScreen.storyboard */; };
+		7CA136BA23C63B5F00FDA3CD /* ReceivedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA136B923C63B5F00FDA3CD /* ReceivedCell.xib */; };
+		7CA136BC23C63B6B00FDA3CD /* SentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA136BB23C63B6B00FDA3CD /* SentCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		7C068CE123C52DFA00D0ADDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C068CE423C52DFA00D0ADDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C068CE623C52DFA00D0ADDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CA136B923C63B5F00FDA3CD /* ReceivedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceivedCell.xib; sourceTree = "<group>"; };
+		7CA136BB23C63B6B00FDA3CD /* SentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SentCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				7C068CD823C52DF900D0ADDA /* AppDelegate.swift */,
 				7C068CDC23C52DF900D0ADDA /* ViewController.swift */,
 				7C068CDE23C52DF900D0ADDA /* Main.storyboard */,
+				7CA136B923C63B5F00FDA3CD /* ReceivedCell.xib */,
+				7CA136BB23C63B6B00FDA3CD /* SentCell.xib */,
 				7C068CE123C52DFA00D0ADDA /* Assets.xcassets */,
 				7C068CE323C52DFA00D0ADDA /* LaunchScreen.storyboard */,
 				7C068CE623C52DFA00D0ADDA /* Info.plist */,
@@ -122,9 +128,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CA136BA23C63B5F00FDA3CD /* ReceivedCell.xib in Resources */,
 				7C068CE523C52DFA00D0ADDA /* LaunchScreen.storyboard in Resources */,
 				7C068CE223C52DFA00D0ADDA /* Assets.xcassets in Resources */,
 				7C068CE023C52DF900D0ADDA /* Main.storyboard in Resources */,
+				7CA136BC23C63B6B00FDA3CD /* SentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +289,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q6X2C36SSC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChatLayout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,7 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q6X2C36SSC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChatLayout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

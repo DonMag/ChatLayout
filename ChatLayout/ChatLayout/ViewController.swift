@@ -82,72 +82,14 @@ class ChatTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		tableView.separatorStyle = .singleLine
-		tableView.separatorColor = .red
+		tableView.register(UINib(nibName: "ReceivedCell", bundle: nil), forCellReuseIdentifier: "ReceivedCell")
+		tableView.register(UINib(nibName: "SentCell",     bundle: nil), forCellReuseIdentifier: "SentCell"    )
+
+		tableView.separatorStyle = .none
+		
+		tableView.estimatedRowHeight = 140
 		
 		getTheData()
-	}
-	
-	func getTheData() -> Void {
-
-		// generate some sample chat messages data
-		// replace this with code to get the data from a server
-		
-		let oneMinute: Double = 60
-		let oneDay: Double = oneMinute * 60 * 24
-		
-		// example date for first message
-		let isoDate = "2020-05-01T10:44:00+0000"
-		
-		let dateFormatter = DateFormatter()
-		dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-
-		// local mutable date object
-		var d: Date = Date()
-		
-		if let date = dateFormatter.date(from:isoDate) {
-			d = date
-		}
-		
-		for _ in 1...5 {
-		theData.append(ChatObject(postedDate: d, userName: "Ricky Bobby", message: "First Message", sentOrReceived: .received))
-
-		// add 5 minutes to the date
-		d = d.addingTimeInterval(oneMinute * 5.0)
-
-		theData.append(ChatObject(postedDate: d, userName: "Ricky Bobby", message: "Second Message", sentOrReceived: .received))
-
-		// add 5 minutes to the date
-		d = d.addingTimeInterval(oneMinute * 5.0)
-		
-		theData.append(ChatObject(postedDate: d, userName: "Cal", message: "What the heck is going on?", sentOrReceived: .sent))
-		
-		// add 12 minutes to the date
-		d = d.addingTimeInterval(oneMinute * 12.0)
-
-		theData.append(ChatObject(postedDate: d, userName: "Cal Naughton Jr", message: "First Reply", sentOrReceived: .sent))
-
-		//add a day + 20 minutes to the date
-		d = d.addingTimeInterval(oneDay + oneMinute * 20.0)
-
-		theData.append(ChatObject(postedDate: d, userName: "Ricky Bobby", message: "Just testing the chat layout.", sentOrReceived: .received))
-
-		//add a day + 37 minutes to the date
-		d = d.addingTimeInterval(oneDay + oneMinute * 37.0)
-
-		theData.append(ChatObject(postedDate: d, userName: "Cal Naughton Jr", message: "This message has enough text to cause word-wrap in the message bubble.", sentOrReceived: .sent))
-
-		// add 5 minutes to the date
-		d = d.addingTimeInterval(oneMinute * 5.0)
-
-		theData.append(ChatObject(postedDate: d, userName: "Ricky Bobby", message: "Woo Hoo! Looks like everything is working as it should!", sentOrReceived: .received))
-		}
-		
-		for i in 0..<theData.count {
-			theData[i].message = "\(i): \(theData[i].message)"
-		}
-		
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -168,8 +110,8 @@ class ChatTableViewController: UITableViewController {
 		df.dateStyle = .medium
 		df.timeStyle = .none
 		
-		// format the date separater string
-		let sepString = "---- " + df.string(from: d.postedDate) + " ----"
+		// format the date separator string
+		let sepString = "———— " + df.string(from: d.postedDate) + " ————"
 		
 		df.dateStyle = .none
 		df.timeStyle = .short
@@ -190,7 +132,7 @@ class ChatTableViewController: UITableViewController {
 		cell?.nameTimeLabel.text = userString
 		cell?.chatLabel.text = d.message
 		
-		// show or hide the date separater label
+		// show or hide the date separator label
 		if indexPath.row == 0 {
 			// first message, so show it
 			cell?.dateSepLabel.isHidden = false
@@ -204,11 +146,13 @@ class ChatTableViewController: UITableViewController {
 			}
 		}
 		
+		// set the constraint priorities based on the date separator label visibility
 		cell?.dateShowingConstraint.priority = (cell?.dateSepLabel.isHidden)! ? .defaultLow : .defaultHigh
 		cell?.dateHiddenConstraint.priority = (cell?.dateSepLabel.isHidden)! ? .defaultHigh : .defaultLow
 		
-		// for design / debugging, set the cell labels background color
-		// to green (to make it easy to see the frames)
+		// for design / debugging, un-comment this block
+		// to set the cell labels background color to green
+		// (to makes it easy to see the label frames)
 		/*
 		[cell?.dateSepLabel, cell?.nameTimeLabel, cell?.chatLabel].forEach {
 			$0?.backgroundColor = .green
@@ -221,3 +165,88 @@ class ChatTableViewController: UITableViewController {
 	
 }
 
+extension ChatTableViewController {
+	
+	func getTheData() -> Void {
+		
+		// generate some sample chat messages data
+		// replace this with code to get the data from a server
+		
+		let oneMinute: Double = 60
+		let oneDay: Double = oneMinute * 60 * 24
+		
+		// example date for first message
+		let isoDate = "2020-01-03T10:44:00+0000"
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+		
+		// local mutable date object
+		var d: Date = Date()
+		
+		if let date = dateFormatter.date(from:isoDate) {
+			d = date
+		}
+		
+		// we'll generate 8 sets of example messages, increasing the time-stamps as we go
+		for _ in 1...8 {
+			theData.append(ChatObject(postedDate: d, userName: "Ricky Bobby",
+									  message: "Hello",
+									  sentOrReceived: .received))
+			
+			// add 5 minutes to the date
+			d = d.addingTimeInterval(oneMinute * 5.0)
+			
+			theData.append(ChatObject(postedDate: d, userName: "Ricky Bobby",
+									  message: "Are you there?",
+									  sentOrReceived: .received))
+			
+			// add 5 minutes to the date
+			d = d.addingTimeInterval(oneMinute * 5.0)
+			
+			theData.append(ChatObject(postedDate: d, userName: "Cal Naughton Jr",
+									  message: "Yes, I'm here.",
+									  sentOrReceived: .sent))
+			
+			// add 12 minutes to the date
+			d = d.addingTimeInterval(oneMinute * 12.0)
+			
+			theData.append(ChatObject(postedDate: d, userName: "Cal Naughton Jr",
+									  message: "What do you want?",
+									  sentOrReceived: .sent))
+			
+			//add a day + 20 minutes to the date
+			d = d.addingTimeInterval(oneDay + oneMinute * 20.0)
+			
+			theData.append(ChatObject(postedDate: d, userName: "Ricky Bobby",
+									  message: "Just testing the chat layout.",
+									  sentOrReceived: .received))
+			
+			//add a day + 37 minutes to the date
+			d = d.addingTimeInterval(oneDay + oneMinute * 37.0)
+			
+			theData.append(ChatObject(postedDate: d, userName: "Cal Naughton Jr",
+									  message: "This message has enough text to cause word-wrap (max Bubble width is 75% of the cell width).",
+									  sentOrReceived: .sent))
+			
+			// add 5 minutes to the date
+			d = d.addingTimeInterval(oneMinute * 5.0)
+			
+			theData.append(ChatObject(postedDate: d, userName: "Ricky Bobby",
+									  message: "If we've done this right, everything is working as it should!",
+									  sentOrReceived: .received))
+			
+			//add a day + 20 minutes to the date
+			d = d.addingTimeInterval(oneDay + oneMinute * 20.0)
+			
+		}
+		
+		// loop through and prepend a count value (since we have 8 sets of the same messages)
+		for i in 0..<theData.count {
+			theData[i].message = "\(i + 1): \(theData[i].message)"
+		}
+		
+	}
+	
+}
